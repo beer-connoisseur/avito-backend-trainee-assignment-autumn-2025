@@ -63,7 +63,7 @@ enum PRStatus {
 }
 
 message TeamMember {
-  string user_id = 1 [(validate.rules).string.uuid = true];
+  string user_id = 1 [(validate.rules).string = {min_len: 1}];
   string username = 2 [(validate.rules).string = {min_len: 1}];
   bool is_active = 3;
 }
@@ -74,26 +74,26 @@ message Team {
 }
 
 message User {
-  string user_id = 1 [(validate.rules).string.uuid = true];
+  string user_id = 1 [(validate.rules).string = {min_len: 1}];
   string username = 2 [(validate.rules).string = {min_len: 1}];
   string team_name = 3 [(validate.rules).string = {min_len: 1}];
   bool is_active = 4;
 }
 
 message PullRequest {
-  string pull_request_id = 1 [(validate.rules).string.uuid = true];
+  string pull_request_id = 1 [(validate.rules).string = {min_len: 1}];
   string pull_request_name = 2 [(validate.rules).string = {min_len: 1}];
-  string author_id = 3 [(validate.rules).string.uuid = true];
+  string author_id = 3 [(validate.rules).string = {min_len: 1}];
   PRStatus status = 4;
-  repeated string assigned_reviewers = 5 [(validate.rules).repeated = {items: {string: {uuid: true}}}];
+  repeated string assigned_reviewers = 5 [(validate.rules).repeated.items.string.min_len = 1];
   google.protobuf.Timestamp created_at = 6;
   google.protobuf.Timestamp merged_at = 7;
 }
 
 message PullRequestShort {
-  string pull_request_id = 1 [(validate.rules).string.uuid = true];
+  string pull_request_id = 1 [(validate.rules).string = {min_len: 1}];
   string pull_request_name = 2 [(validate.rules).string = {min_len: 1}];
-  string author_id = 3 [(validate.rules).string.uuid = true];
+  string author_id = 3 [(validate.rules).string = {min_len: 1}];
   PRStatus status = 4;
 }
 
@@ -124,7 +124,7 @@ message GetTeamResponse {
 }
 
 message SetUserActiveRequest {
-  string user_id = 1 [(validate.rules).string.uuid = true];
+  string user_id = 1 [(validate.rules).string = {min_len: 1}];
   bool is_active = 2;
 }
 
@@ -133,7 +133,7 @@ message SetUserActiveResponse {
 }
 
 message GetUserReviewsRequest {
-  string user_id = 1 [(validate.rules).string.uuid = true];
+  string user_id = 1 [(validate.rules).string = {min_len: 1}];
 }
 
 message GetUserReviewsResponse {
@@ -142,9 +142,9 @@ message GetUserReviewsResponse {
 }
 
 message CreatePullRequestRequest {
-  string pull_request_id = 1 [(validate.rules).string.uuid = true];
+  string pull_request_id = 1 [(validate.rules).string = {min_len: 1}];
   string pull_request_name = 2 [(validate.rules).string = {min_len: 1}];
-  string author_id = 3 [(validate.rules).string.uuid = true];
+  string author_id = 3 [(validate.rules).string = {min_len: 1}];
 }
 
 message CreatePullRequestResponse {
@@ -152,7 +152,7 @@ message CreatePullRequestResponse {
 }
 
 message MergePullRequestRequest {
-  string pull_request_id = 1 [(validate.rules).string.uuid = true];
+  string pull_request_id = 1 [(validate.rules).string = {min_len: 1}];
 }
 
 message MergePullRequestResponse {
@@ -160,8 +160,8 @@ message MergePullRequestResponse {
 }
 
 message ReassignReviewerRequest {
-  string pull_request_id = 1 [(validate.rules).string.uuid = true];
-  string old_reviewer_id = 2 [(validate.rules).string.uuid = true];
+  string pull_request_id = 1 [(validate.rules).string = {min_len: 1}];
+  string old_reviewer_id = 2 [(validate.rules).string = {min_len: 1}];
 }
 
 message ReassignReviewerResponse {
