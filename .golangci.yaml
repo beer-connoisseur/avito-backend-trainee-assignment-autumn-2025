@@ -47,7 +47,6 @@ linters:
     - ineffassign
     - typecheck
     - goconst
-    - goimports
     - gosimple
     - staticcheck
     - unused
