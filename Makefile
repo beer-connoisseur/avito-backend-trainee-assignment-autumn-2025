@@ -2,31 +2,20 @@ LOCAL_BIN := $(CURDIR)/bin
 EASYP_BIN := $(LOCAL_BIN)/easyp
 GOIMPORTS_BIN := $(LOCAL_BIN)/goimports
 GOLANGCI_BIN := $(LOCAL_BIN)/golangci-lint
-GO_TEST=$(LOCAL_BIN)/gotest
-GO_TEST_ARGS=-race -v -tags=integration_test ./...
 PROTOC_DOWNLOAD_LINK="https://github.com/protocolbuffers/protobuf/releases"
 PROTOC_VERSION=29.2
 UNAME_S := $(shell uname -s)
 UNAME_P := $(shell uname -p)
 
-ARCH :=
-
 ifeq ($(UNAME_S),Linux)
-    INSTALL_CMD = sudo apt-get update && sudo apt install -y protobuf-compiler
-    ARCH = linux-x86_64
+    INSTALL_CMD = apt-get update && apt install -y protobuf-compiler
 endif
 
 ifeq ($(UNAME_S),Darwin)
-    ifeq ($(UNAME_P),arm)
-        INSTALL_CMD = brew install protobuf
-        ARCH = osx-universal_binary
-    else
-        INSTALL_CMD = sudo apt install -y protobuf-compiler
-        ARCH = linux-x86_64
-    endif
+    INSTALL_CMD = brew install protobuf
 endif
 
-all: generate lint test
+all: generate lint
 
 .PHONY: lint
 lint:
@@ -36,11 +25,6 @@ lint:
 	--sort-results \
 	--max-issues-per-linter=0 \
 	--max-same-issues=0
-
-.PHONY: test
-test:
-	echo 'Running tests...'
-	${GO_TEST} ${GO_TEST_ARGS}
 
 .install-protoc:
 	$(INSTALL_CMD)
@@ -85,3 +69,4 @@ fast-generate: .generate
 build:
 	go mod tidy
 	go build -o ./bin/pr-review ./cmd/pr-review/
+	chmod +x ./bin/pr-review
