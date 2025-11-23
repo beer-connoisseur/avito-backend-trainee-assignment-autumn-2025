@@ -1,0 +1,497 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "api/pr-review/pr-review.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "PRReviewerService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/pullRequest/create": {
+      "post": {
+        "operationId": "PRReviewerService_CreatePullRequest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewCreatePullRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pr_reviewCreatePullRequestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/pullRequest/merge": {
+      "post": {
+        "operationId": "PRReviewerService_MergePullRequest",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewMergePullRequestResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pr_reviewMergePullRequestRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/pullRequest/reassign": {
+      "post": {
+        "operationId": "PRReviewerService_ReassignReviewer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewReassignReviewerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pr_reviewReassignReviewerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/team/add": {
+      "post": {
+        "operationId": "PRReviewerService_AddTeam",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewAddTeamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pr_reviewAddTeamRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/team/get": {
+      "get": {
+        "operationId": "PRReviewerService_GetTeam",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewGetTeamResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "teamName",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/users/getReview": {
+      "get": {
+        "operationId": "PRReviewerService_GetUserReviews",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewGetUserReviewsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    },
+    "/users/setIsActive": {
+      "post": {
+        "operationId": "PRReviewerService_SetUserActive",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/pr_reviewSetUserActiveResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/pr_reviewSetUserActiveRequest"
+            }
+          }
+        ],
+        "tags": [
+          "PRReviewerService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "pr_reviewAddTeamRequest": {
+      "type": "object",
+      "properties": {
+        "teamName": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pr_reviewTeamMember"
+          }
+        }
+      }
+    },
+    "pr_reviewAddTeamResponse": {
+      "type": "object",
+      "properties": {
+        "team": {
+          "$ref": "#/definitions/pr_reviewTeam"
+        }
+      }
+    },
+    "pr_reviewCreatePullRequestRequest": {
+      "type": "object",
+      "properties": {
+        "pullRequestId": {
+          "type": "string"
+        },
+        "pullRequestName": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        }
+      }
+    },
+    "pr_reviewCreatePullRequestResponse": {
+      "type": "object",
+      "properties": {
+        "pr": {
+          "$ref": "#/definitions/pr_reviewPullRequest"
+        }
+      }
+    },
+    "pr_reviewGetTeamResponse": {
+      "type": "object",
+      "properties": {
+        "team": {
+          "$ref": "#/definitions/pr_reviewTeam"
+        }
+      }
+    },
+    "pr_reviewGetUserReviewsResponse": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "pullRequests": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pr_reviewPullRequestShort"
+          }
+        }
+      }
+    },
+    "pr_reviewMergePullRequestRequest": {
+      "type": "object",
+      "properties": {
+        "pullRequestId": {
+          "type": "string"
+        }
+      }
+    },
+    "pr_reviewMergePullRequestResponse": {
+      "type": "object",
+      "properties": {
+        "pr": {
+          "$ref": "#/definitions/pr_reviewPullRequest"
+        }
+      }
+    },
+    "pr_reviewPRStatus": {
+      "type": "string",
+      "enum": [
+        "OPEN",
+        "MERGED"
+      ],
+      "default": "OPEN"
+    },
+    "pr_reviewPullRequest": {
+      "type": "object",
+      "properties": {
+        "pullRequestId": {
+          "type": "string"
+        },
+        "pullRequestName": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/pr_reviewPRStatus"
+        },
+        "assignedReviewers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "mergedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pr_reviewPullRequestShort": {
+      "type": "object",
+      "properties": {
+        "pullRequestId": {
+          "type": "string"
+        },
+        "pullRequestName": {
+          "type": "string"
+        },
+        "authorId": {
+          "type": "string"
+        },
+        "status": {
+          "$ref": "#/definitions/pr_reviewPRStatus"
+        }
+      }
+    },
+    "pr_reviewReassignReviewerRequest": {
+      "type": "object",
+      "properties": {
+        "pullRequestId": {
+          "type": "string"
+        },
+        "oldReviewerId": {
+          "type": "string"
+        }
+      }
+    },
+    "pr_reviewReassignReviewerResponse": {
+      "type": "object",
+      "properties": {
+        "pr": {
+          "$ref": "#/definitions/pr_reviewPullRequest"
+        },
+        "replacedBy": {
+          "type": "string"
+        }
+      }
+    },
+    "pr_reviewSetUserActiveRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pr_reviewSetUserActiveResponse": {
+      "type": "object",
+      "properties": {
+        "user": {
+          "$ref": "#/definitions/pr_reviewUser"
+        }
+      }
+    },
+    "pr_reviewTeam": {
+      "type": "object",
+      "properties": {
+        "teamName": {
+          "type": "string"
+        },
+        "members": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/pr_reviewTeamMember"
+          }
+        }
+      }
+    },
+    "pr_reviewTeamMember": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "pr_reviewUser": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "teamName": {
+          "type": "string"
+        },
+        "isActive": {
+          "type": "boolean"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}
